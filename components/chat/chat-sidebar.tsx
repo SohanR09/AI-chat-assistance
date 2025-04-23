@@ -1,7 +1,7 @@
-"use client"
-import { format } from "date-fns"
-import { PlusCircle } from "lucide-react"
-import { Button } from "@/components/ui/button"
+"use client";
+import { format } from "date-fns";
+import { PlusCircle } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import {
   Sidebar,
   SidebarContent,
@@ -12,7 +12,7 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-} from "@/components/ui/sidebar"
+} from "@/components/ui/sidebar";
 
 // Mock data for chat history
 const chatHistory = [
@@ -35,19 +35,27 @@ const chatHistory = [
     date: new Date(Date.now() - 172800000), // 2 days ago
     chats: [{ id: "6", title: "Neural networks explained" }],
   },
-]
+];
 
 interface ChatSidebarProps {
-  onNewChat: () => void
-  onSelectChat: (chatId: string) => void
-  selectedChatId?: string
+  onNewChat: () => void;
+  onSelectChat: (chatId: string) => void;
+  selectedChatId?: string;
 }
 
-export function ChatSidebar({ onNewChat, onSelectChat, selectedChatId }: ChatSidebarProps) {
+export function ChatSidebar({
+  onNewChat,
+  onSelectChat,
+  selectedChatId,
+}: ChatSidebarProps) {
   return (
-    <Sidebar className="pt-0">
-      <SidebarHeader className="pt-4">
-        <Button variant="outline" className="w-full justify-start gap-2" onClick={onNewChat}>
+    <Sidebar className="h-full w-64 border-r bg-white shadow-md pt-16">
+      <SidebarHeader className="flex items-center justify-between p-4 border-b">
+        <Button
+          variant="outline"
+          className="w-full justify-start gap-2"
+          onClick={onNewChat}
+        >
           <PlusCircle className="h-4 w-4" />
           New Chat
         </Button>
@@ -55,12 +63,17 @@ export function ChatSidebar({ onNewChat, onSelectChat, selectedChatId }: ChatSid
       <SidebarContent>
         {chatHistory.map((dayGroup) => (
           <SidebarGroup key={dayGroup.date.toISOString()}>
-            <SidebarGroupLabel>{format(dayGroup.date, "MMMM d, yyyy")}</SidebarGroupLabel>
+            <SidebarGroupLabel>
+              {format(dayGroup.date, "MMMM d, yyyy")}
+            </SidebarGroupLabel>
             <SidebarGroupContent>
               <SidebarMenu>
                 {dayGroup.chats.map((chat) => (
                   <SidebarMenuItem key={chat.id}>
-                    <SidebarMenuButton isActive={selectedChatId === chat.id} onClick={() => onSelectChat(chat.id)}>
+                    <SidebarMenuButton
+                      isActive={selectedChatId === chat.id}
+                      onClick={() => onSelectChat(chat.id)}
+                    >
                       {chat.title}
                     </SidebarMenuButton>
                   </SidebarMenuItem>
@@ -71,5 +84,5 @@ export function ChatSidebar({ onNewChat, onSelectChat, selectedChatId }: ChatSid
         ))}
       </SidebarContent>
     </Sidebar>
-  )
+  );
 }

@@ -1,9 +1,9 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import Link from "next/link"
-import { usePathname } from "next/navigation"
-import { ChevronDown } from "lucide-react"
+import { useState } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { ChevronDown } from "lucide-react";
 import {
   Sidebar,
   SidebarContent,
@@ -17,9 +17,13 @@ import {
   SidebarMenuSub,
   SidebarMenuSubButton,
   SidebarMenuSubItem,
-} from "@/components/ui/sidebar"
-import { Input } from "@/components/ui/input"
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible"
+} from "@/components/ui/sidebar";
+import { Input } from "@/components/ui/input";
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible";
 
 const docsNavigation = [
   {
@@ -50,7 +54,10 @@ const docsNavigation = [
   {
     title: "Features",
     items: [
-      { title: "Natural Language Understanding", href: "#natural-language-understanding" },
+      {
+        title: "Natural Language Understanding",
+        href: "#natural-language-understanding",
+      },
       { title: "Conversation History", href: "#conversation-history" },
       { title: "Multi-turn Conversations", href: "#multi-turn-conversations" },
     ],
@@ -72,20 +79,22 @@ const docsNavigation = [
       { title: "Troubleshooting", href: "#troubleshooting" },
     ],
   },
-]
+];
 
 export function DocsSidebar() {
-  const pathname = usePathname()
-  const [search, setSearch] = useState("")
+  const pathname = usePathname();
+  const [search, setSearch] = useState("");
 
   const filteredNavigation = search
     ? docsNavigation
         .map((section) => ({
           ...section,
-          items: section.items.filter((item) => item.title.toLowerCase().includes(search.toLowerCase())),
+          items: section.items.filter((item) =>
+            item.title.toLowerCase().includes(search.toLowerCase())
+          ),
         }))
         .filter((section) => section.items.length > 0)
-    : docsNavigation
+    : docsNavigation;
 
   return (
     <Sidebar className="pt-0 border-r">
@@ -119,7 +128,9 @@ export function DocsSidebar() {
                               {item.items.map((subItem) => (
                                 <SidebarMenuSubItem key={subItem.title}>
                                   <SidebarMenuSubButton asChild>
-                                    <Link href={subItem.href}>{subItem.title}</Link>
+                                    <Link href={subItem.href}>
+                                      {subItem.title}
+                                    </Link>
                                   </SidebarMenuSubButton>
                                 </SidebarMenuSubItem>
                               ))}
@@ -127,7 +138,7 @@ export function DocsSidebar() {
                           </CollapsibleContent>
                         </SidebarMenuItem>
                       </Collapsible>
-                    )
+                    );
                   }
                   return (
                     <SidebarMenuItem key={item.title}>
@@ -135,7 +146,7 @@ export function DocsSidebar() {
                         <Link href={item.href}>{item.title}</Link>
                       </SidebarMenuButton>
                     </SidebarMenuItem>
-                  )
+                  );
                 })}
               </SidebarMenu>
             </SidebarGroupContent>
@@ -143,5 +154,5 @@ export function DocsSidebar() {
         ))}
       </SidebarContent>
     </Sidebar>
-  )
+  );
 }
