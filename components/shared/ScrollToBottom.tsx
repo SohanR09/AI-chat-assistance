@@ -27,6 +27,7 @@ const ScrollToBottomButton: React.FC<ScrollToBottomButtonProps> = ({
   const handleScroll = () => {
     // Show the button immediately
     setIsVisible(true);
+    debugger;
 
     // Reset timer if already running
     if (hideTimeout.current) {
@@ -40,6 +41,7 @@ const ScrollToBottomButton: React.FC<ScrollToBottomButtonProps> = ({
   };
 
   el.addEventListener("wheel", handleScroll);
+  el.addEventListener("scroll", handleScroll);
 
   const scrollToBottomFunction = () => {
     const el = scrollToBottom.current;
