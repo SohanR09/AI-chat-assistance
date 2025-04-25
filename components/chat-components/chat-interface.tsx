@@ -8,7 +8,7 @@ import { useChat } from "@ai-sdk/react";
 import { Send } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import MarkDownMessage from "../MarkDown/MarkdownMessage";
-import ChatSection from "./chat-section";
+import ChatSection from "./chat-scroll";
 import ChatInputZone from "./chat-inputzone";
 
 export function ChatInterface() {
@@ -29,24 +29,20 @@ export function ChatInterface() {
     },
   });
 
-  const messagesEndRef = useRef<HTMLDivElement>(null);
-
-  // Scroll to bottom when messages change
-  useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages]);
-
   return (
-    <div className="flex flex-col h-full overflow-hidden">
+    <div className="flex flex-col md:max-w-5xl w-full h-full overflow-hidden md:container md:mx-auto pt-4 md:px-8">
       <ChatSection messages={messages} error={error} isLoading={isLoading} />
-      <div ref={messagesEndRef} />
-      <ChatInputZone
-        input={input}
-        isLoading={isLoading}
-        setIsLoading={setIsLoading}
-        handleSubmit={handleSubmit}
-        handleInputChange={handleInputChange}
-      />
+      <div className="border rounded-lg p-4 bg-background relative h-[90px]">
+        <div className="absolute bottom-0 left-0 right-0 z-50 p-4">
+          <ChatInputZone
+            input={input}
+            isLoading={isLoading}
+            setIsLoading={setIsLoading}
+            handleSubmit={handleSubmit}
+            handleInputChange={handleInputChange}
+          />
+        </div>
+      </div>
     </div>
   );
 }

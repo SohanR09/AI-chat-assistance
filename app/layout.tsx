@@ -1,4 +1,5 @@
 import Header from "@/components/Header";
+import Providers from "@/components/Provider";
 import { CardSkeleton } from "@/components/skeleton";
 import { Inter } from "next/font/google";
 import type React from "react";
@@ -19,15 +20,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className={inter.className} suppressHydrationWarning>
-        <div className="min-h-screen flex flex-col">
-          <Header />
-          <main className="flex-1">
-            <Suspense fallback={<CardSkeleton />}>{children}</Suspense>
-          </main>
-        </div>
-      </body>
-    </html>
+    <Providers>
+      <html lang="en" suppressHydrationWarning>
+        <body className={inter.className} suppressHydrationWarning>
+          <div className="min-h-screen flex flex-col">
+            <Header />
+            <main className="flex-1 bg-gray-100">
+              <Suspense fallback={<CardSkeleton />}>{children}</Suspense>
+            </main>
+          </div>
+        </body>
+      </html>
+    </Providers>
   );
 }

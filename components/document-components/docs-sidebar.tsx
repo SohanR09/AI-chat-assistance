@@ -97,7 +97,7 @@ export function DocsSidebar() {
     : docsNavigation;
 
   return (
-    <Sidebar className="pt-0 border-r">
+    <Sidebar className="pt-16 border-r">
       <SidebarHeader className="pt-4 px-4">
         <Input
           placeholder="Search documentation..."

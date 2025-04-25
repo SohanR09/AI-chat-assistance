@@ -1,3 +1,5 @@
+import { DocsSidebar } from "@/components/document-components/docs-sidebar";
+import SidebarToggle from "@/components/shared/SidebarToggle";
 import {
   Card,
   CardContent,
@@ -5,7 +7,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { DocsSidebar } from "@/components/docs-sidebar";
 import { SidebarProvider } from "@/components/ui/sidebar";
 
 export default function DocumentsPage() {
@@ -13,7 +14,8 @@ export default function DocumentsPage() {
     <SidebarProvider>
       <div className="flex h-full pt-16">
         <DocsSidebar />
-        <div className="flex-1 overflow-auto">
+        <div className="flex-1 overflow-auto p-2">
+          <SidebarToggle />
           <div className="container py-8 max-w-4xl">
             <div className="space-y-8">
               <div className="space-y-4">

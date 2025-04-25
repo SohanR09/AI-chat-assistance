@@ -1,9 +1,11 @@
 "use client";
 
-import { ChatInterface } from "@/components/chat/chat-interface";
-import { ChatSidebar } from "@/components/chat/chat-sidebar";
-import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { ChatInterface } from "@/components/chat-components/chat-interface";
+import { ChatSidebar } from "@/components/chat-components/chat-sidebar";
+import { SidebarProvider } from "@/components/ui/sidebar";
 import { useState } from "react";
+import ChatTopRight from "../chat-components/chat-TopRight";
+import ChatTopLeft from "../chat-components/chat-TopLeft";
 
 export default function ChatPage() {
   const [selectedChatId, setSelectedChatId] = useState<string | undefined>(
@@ -22,18 +24,19 @@ export default function ChatPage() {
 
   return (
     <SidebarProvider>
-      <div className="flex h-full w-full">
-        <ChatSidebar
+      <div className="flex h-full w-full bg-gray-100 pt-4 md:pt-0">
+        {/* hide on development */}
+        {/* <ChatSidebar
           onNewChat={handleNewChat}
           onSelectChat={handleSelectChat}
           selectedChatId={selectedChatId}
-        />
-        <SidebarTrigger className="md:hidden z-50 fixed top-4 left-4"></SidebarTrigger>
-
+        /> */}
+        <ChatTopLeft />
         {/* Main chat interface */}
         <div className="flex-1 w-full">
           <ChatInterface />
-        </div>
+        </div>{" "}
+        <ChatTopRight />
       </div>
     </SidebarProvider>
   );
