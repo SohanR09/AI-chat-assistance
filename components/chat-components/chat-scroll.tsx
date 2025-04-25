@@ -81,7 +81,7 @@ function ChatSection({ messages, error, isLoading }: ChatSectionProps) {
                   <div
                     className={`rounded-lg p-3 ${
                       message.role === "user"
-                        ? "bg-stone-900 text-primary-foreground w-1/2 md:w-full"
+                        ? "bg-stone-900 text-primary-foreground"
                         : "bg-muted"
                     }`}
                   >

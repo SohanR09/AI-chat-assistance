@@ -1,7 +1,7 @@
 "use client";
 
 import { useIsMobile } from "@/hooks/use-mobile";
-import { SignedIn, UserButton } from "@clerk/nextjs";
+import { SignedIn, SignedOut, UserButton, useUser } from "@clerk/nextjs";
 import { ApertureIcon } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -14,7 +14,7 @@ const Header = () => {
   const pathname = usePathname();
 
   const [isLoading, setIsLoading] = useState(true);
-  const [isError, setIsError] = useState(false);
+  const { isSignedIn } = useUser();
 
   useEffect(() => {
     // Simulate a loading state for demonstration purposes
@@ -46,9 +46,13 @@ const Header = () => {
                 <Logo />
               </div>
               <div className="flex items-center justify-center space-x-4">
-                <SignedIn>
-                  <UserButton />
-                </SignedIn>
+                {!isSignedIn ? (
+                  <Link href={"/auth/sign-in"}>Sign In</Link>
+                ) : (
+                  <SignedIn>
+                    <UserButton />
+                  </SignedIn>
+                )}
               </div>
             </div>
           </div>
