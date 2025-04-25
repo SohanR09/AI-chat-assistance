@@ -27,7 +27,7 @@ function ChatSection({ messages, error, isLoading }: ChatSectionProps) {
 
   return (
     <ScrollArea
-      className="h-[calc(100vh-8rem)] bg-gray-100 overflow-y-auto px-8"
+      className="h-[calc(100vh-8rem)] bg-gray-100 overflow-y-auto px-2"
       ref={scrollAreaSEctionRef}
     >
       <div className="flex flex-col gap-4 justify-end h-full mt-10 md:mt-0">
@@ -54,7 +54,7 @@ function ChatSection({ messages, error, isLoading }: ChatSectionProps) {
               }`}
             >
               <div
-                className={`flex gap-3 max-w-[80%] ${
+                className={`flex gap-1 max-w-[80%] ${
                   message.role === "user" ? "flex-row-reverse" : ""
                 }`}
               >
@@ -81,7 +81,7 @@ function ChatSection({ messages, error, isLoading }: ChatSectionProps) {
                   <div
                     className={`rounded-lg p-3 ${
                       message.role === "user"
-                        ? "bg-stone-900 text-primary-foreground"
+                        ? "bg-stone-900 text-primary-foreground w-1/2 md:w-full"
                         : "bg-muted"
                     }`}
                   >
