@@ -12,6 +12,7 @@ import {
   UserButton,
   useUser,
 } from "@clerk/nextjs";
+import Logo from "@/public/Logo";
 
 export default function DesktopHeader() {
   const pathname = usePathname();
@@ -24,12 +25,7 @@ export default function DesktopHeader() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           <div className="flex items-center">
-            <Link href="/" className="flex flex-col items-end space-x-2">
-              <div className="flex items-center justify-center space-x-2">
-                <h1 className="text-2xl font-bold">Chat</h1>
-                <p className="text-sm text-gray-500">Beta</p>
-              </div>
-            </Link>
+            <Logo />
           </div>
           {!isAuthPage && (
             <nav className="flex items-center space-x-4">

@@ -1,12 +1,13 @@
 "use client";
 
 import { useIsMobile } from "@/hooks/use-mobile";
+import { SignedIn, UserButton } from "@clerk/nextjs";
 import { ApertureIcon } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import DesktopHeader from "./DesktopHeader";
-import ChatHeader from "./ChatHeader";
+import Logo from "@/public/Logo";
 
 const Header = () => {
   const isMobile = useIsMobile(); // Placeholder for mobile check
@@ -40,19 +41,14 @@ const Header = () => {
         <header className="fixed top-0 left-0 right-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             {" "}
-            <div
-              className={`flex h-16 items-center ${
-                pathname === "/c" ? "justify-end" : "justify-between"
-              }`}
-            >
+            <div className={`flex h-16 items-center justify-between `}>
               <div className="flex items-center">
-                <Link
-                  href="/"
-                  className="flex justify-center items-center space-x-2"
-                >
-                  <ApertureIcon className="h-7 w-7 text-primary" />
-                  <span className="text-xl font-bold">Chat.Flick</span>
-                </Link>
+                <Logo />
+              </div>
+              <div className="flex items-center justify-center space-x-4">
+                <SignedIn>
+                  <UserButton />
+                </SignedIn>
               </div>
             </div>
           </div>
