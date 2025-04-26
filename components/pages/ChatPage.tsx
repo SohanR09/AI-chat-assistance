@@ -6,8 +6,9 @@ import { SidebarProvider } from "@/components/ui/sidebar";
 import { useState } from "react";
 import ChatTopRight from "../chat-components/chat-TopRight";
 import ChatTopLeft from "../chat-components/chat-TopLeft";
+import { User } from "@/index";
 
-export default function ChatPage() {
+export default function ChatPage({ user }: { user: User }) {
   const [selectedChatId, setSelectedChatId] = useState<string | undefined>(
     undefined
   );
@@ -24,7 +25,7 @@ export default function ChatPage() {
 
   return (
     <SidebarProvider>
-      <div className="flex h-full w-full bg-gray-100 pt-4 md:pt-0">
+      <div className="flex h-full w-full bg-gradient-to-b from-stone-400 to-muted pt-4 md:pt-0">
         {/* hide on development */}
         {/* <ChatSidebar
           onNewChat={handleNewChat}
@@ -34,7 +35,7 @@ export default function ChatPage() {
         <ChatTopLeft />
         {/* Main chat interface */}
         <div className="flex-1 w-full">
-          <ChatInterface />
+          <ChatInterface user={user} />
         </div>{" "}
         <ChatTopRight />
       </div>

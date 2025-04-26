@@ -1,9 +1,19 @@
-import { SignUp } from "@clerk/nextjs";
+import SignUpPage from "@/components/pages/SignUpPage";
+import { CardSkeleton } from "@/components/skeleton";
+import { Suspense } from "react";
 
 export default function Page() {
   return (
-    <div className="flex h-full min-h-[calc(100vh-2rem)] justify-center items-center mt-4">
-      <SignUp path="/auth/sign-up" routing="path" signInUrl="/auth/sign-in" />
-    </div>
+    <Suspense
+      fallback={
+        <div className="container flex items-center justify-center min-h-[calc(100vh-4rem)] py-12">
+          <div className="w-full max-w-md">
+            <CardSkeleton />
+          </div>
+        </div>
+      }
+    >
+      <SignUpPage />
+    </Suspense>
   );
 }

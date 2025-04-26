@@ -1,26 +1,33 @@
-import Link from "next/link"
+import Link from "next/link";
 
 export function Footer() {
   return (
-    <footer className="bg-muted py-12 border-t">
+    <footer className="bg-gradient-to-t from-stone-400 to-muted py-12 border-t">
       <div className="container px-4 md:px-6">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="space-y-4">
             <h3 className="text-lg font-bold">AI Chat Assistant</h3>
             <p className="text-sm text-muted-foreground">
-              Your intelligent AI-powered conversation assistant. Get answers, insights, and assistance in real-time.
+              Your intelligent AI-powered conversation assistant. Get answers,
+              insights, and assistance in real-time.
             </p>
           </div>
           <div className="space-y-4">
             <h3 className="text-lg font-bold">Quick Links</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="/" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                <Link
+                  href="/"
+                  className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                >
                   Home
                 </Link>
               </li>
               <li>
-                <Link href="/chat" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                <Link
+                  href="/chat"
+                  className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                >
                   Chat
                 </Link>
               </li>
@@ -46,12 +53,18 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                <Link
+                  href="#"
+                  className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                >
                   Blog
                 </Link>
               </li>
               <li>
-                <Link href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                <Link
+                  href="#"
+                  className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                >
                   Tutorials
                 </Link>
               </li>
@@ -61,17 +74,26 @@ export function Footer() {
             <h3 className="text-lg font-bold">Legal</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                <Link
+                  href="#"
+                  className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                >
                   Privacy Policy
                 </Link>
               </li>
               <li>
-                <Link href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                <Link
+                  href="#"
+                  className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                >
                   Terms of Service
                 </Link>
               </li>
               <li>
-                <Link href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                <Link
+                  href="#"
+                  className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                >
                   Cookie Policy
                 </Link>
               </li>
@@ -85,5 +107,5 @@ export function Footer() {
         </div>
       </div>
     </footer>
-  )
+  );
 }

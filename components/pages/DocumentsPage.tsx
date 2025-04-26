@@ -12,11 +12,11 @@ import { SidebarProvider } from "@/components/ui/sidebar";
 export default function DocumentsPage() {
   return (
     <SidebarProvider>
-      <div className="flex h-full pt-16">
+      <div className="flex h-full pt-16 bg-white w-full">
         <DocsSidebar />
         <div className="flex-1 overflow-auto p-2">
           <SidebarToggle />
-          <div className="container py-8 max-w-4xl">
+          <div className="container py-0 max-w-4xl">
             <div className="space-y-8">
               <div className="space-y-4">
                 <h1

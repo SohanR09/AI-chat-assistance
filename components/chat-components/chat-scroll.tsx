@@ -5,18 +5,27 @@ import { useUser } from "@clerk/nextjs";
 import { useEffect, useRef } from "react";
 import MarkDownMessage from "../MarkDown/MarkdownMessage";
 import ScrollToBottomButton from "../shared/ScrollToBottom";
-import { Avatar, AvatarFallback } from "../ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { ScrollArea } from "../ui/scroll-area";
+import { User } from "@/index";
+import { Bot } from "lucide-react";
+import ThinkingLoader from "@/public/ThinkingLoader";
 
 interface ChatSectionProps {
   messages: any;
   error: string | null;
   isLoading: boolean;
+  user: User | null;
+  thinking: boolean;
 }
 
-function ChatSection({ messages, error, isLoading }: ChatSectionProps) {
-  const { user } = useUser();
-
+function ChatSection({
+  messages,
+  error,
+  isLoading,
+  user,
+  thinking,
+}: ChatSectionProps) {
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const scrollAreaSEctionRef = useRef<HTMLDivElement>(null);
 
@@ -24,10 +33,9 @@ function ChatSection({ messages, error, isLoading }: ChatSectionProps) {
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
-
   return (
     <ScrollArea
-      className="h-[calc(100vh-8rem)] bg-gray-100 overflow-y-auto px-2"
+      className="h-[calc(100vh-8rem)] overflow-y-auto px-2"
       ref={scrollAreaSEctionRef}
     >
       <div className="flex flex-col gap-4 justify-end h-full mt-10 md:mt-0">
@@ -45,55 +53,67 @@ function ChatSection({ messages, error, isLoading }: ChatSectionProps) {
             </p>
           </div>
         ) : (
-          messages?.map((message: any) => (
-            <div
-              key={message.id}
-              id="scrolling-area"
-              className={`flex ${
-                message.role === "user" ? "justify-end" : "justify-start"
-              }`}
-            >
+          messages?.map((message: any, index: number) => {
+            const isLastMessage = index === messages.length - 1;
+            const isAssistant = message.role === "assistant";
+            return (
               <div
-                className={`flex gap-1 max-w-[80%] ${
-                  message.role === "user" ? "flex-row-reverse" : ""
+                key={message.id}
+                id="scrolling-area"
+                className={`flex ${
+                  message.role === "user" ? "justify-end" : "justify-start"
                 }`}
               >
-                <Avatar className="h-8 w-8">
-                  {message?.role === "user" ? (
-                    <>
+                <div
+                  className={`flex gap-1 max-w-[80%] ${
+                    message.role === "user" ? "flex-row-reverse" : ""
+                  }`}
+                >
+                  <Avatar className="h-8 w-8">
+                    {message?.role === "user" ? (
+                      <>
+                        {user?.profileImageUrl ? (
+                          <AvatarImage src={user?.profileImageUrl} />
+                        ) : (
+                          <AvatarFallback className="text-stone-800 bg-gray-200 font-medium">
+                            {user?.firstName?.slice(0, 1).toUpperCase()}
+                          </AvatarFallback>
+                        )}
+                      </>
+                    ) : (
                       <AvatarFallback className="text-stone-800 bg-gray-200 font-medium">
-                        U
+                        <Bot className="h-6 w-6" />
                       </AvatarFallback>
-                      {/* <AvatarImage src="/placeholder.svg?height=32&width=32" /> */}
-                    </>
+                    )}
+                  </Avatar>
+                  {error && error?.length > 0 ? (
+                    <div>{error}</div>
                   ) : (
-                    <>
-                      <AvatarFallback className="text-stone-800 bg-gray-200 font-medium">
-                        AI
-                      </AvatarFallback>
-                      {/* <AvatarImage src="/placeholder.svg?height=32&width=32" /> */}
-                    </>
+                    <div
+                      className={`rounded-lg p-3 ${
+                        message.role === "user"
+                          ? "bg-stone-900 text-primary-foreground"
+                          : "bg-muted"
+                      }`}
+                    >
+                      <MarkDownMessage
+                        markdown={message.content}
+                        role={message?.role}
+                      />
+                      {isAssistant && isLastMessage && thinking && (
+                        <div className="flex justify-end items-center mt-2">
+                          <span className="text-muted-foreground text-sm mr-2 flex items-center">
+                            <LoadingSpinner />
+                            Thinking...
+                          </span>
+                        </div>
+                      )}
+                    </div>
                   )}
-                </Avatar>
-                {error && error?.length > 0 ? (
-                  <div>{error}</div>
-                ) : (
-                  <div
-                    className={`rounded-lg p-3 ${
-                      message.role === "user"
-                        ? "bg-stone-900 text-primary-foreground"
-                        : "bg-muted"
-                    }`}
-                  >
-                    <MarkDownMessage
-                      markdown={message.content}
-                      role={message?.role}
-                    />
-                  </div>
-                )}
+                </div>
               </div>
-            </div>
-          ))
+            );
+          })
         )}
         {messages?.length > 0 && (
           <ScrollToBottomButton

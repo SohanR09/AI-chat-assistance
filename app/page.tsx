@@ -1,6 +1,13 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, MessageSquare, Zap, Shield } from "lucide-react";
+import {
+  ArrowRight,
+  MessageSquare,
+  Zap,
+  Shield,
+  Bot,
+  User,
+} from "lucide-react";
 // Import the Footer component at the top of the file
 import { Footer } from "@/components/footer";
 
@@ -8,7 +15,7 @@ export default function Home() {
   return (
     <div className="flex flex-col min-h-[calc(100vh-4rem)]">
       {/* Hero Section */}
-      <section className="w-full py-20 md:py-24 lg:py-32 bg-gradient-to-b from-background to-muted">
+      <section className="w-full py-20 md:py-24 lg:py-32 bg-gradient-to-b from-stone-400 to-muted">
         <div className="container px-4 md:px-6">
           <div className="grid gap-6 lg:grid-cols-2 lg:gap-12 items-center">
             <div className="flex flex-col justify-center space-y-4">
@@ -40,7 +47,7 @@ export default function Home() {
                   <div className="flex-1 space-y-4">
                     <div className="flex items-start gap-4">
                       <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center">
-                        <MessageSquare className="h-5 w-5 text-primary" />
+                        <Bot className="h-6 w-6 text-primary" />
                       </div>
                       <div className="flex-1 space-y-2">
                         <p className="text-sm text-muted-foreground">
@@ -64,8 +71,8 @@ export default function Home() {
                           </p>
                         </div>
                       </div>
-                      <div className="h-10 w-10 rounded-full bg-secondary/10 flex items-center justify-center">
-                        <span className="text-sm font-medium">You</span>
+                      <div className="h-10 w-10 rounded-full bg-gray-200 flex items-center justify-center">
+                        <User className="h-6 w-6 text-primary" />
                       </div>
                     </div>
                   </div>

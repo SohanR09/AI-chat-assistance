@@ -1,9 +1,11 @@
 "use client";
 
-import { useState } from "react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { ChevronDown } from "lucide-react";
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible";
+import { Input } from "@/components/ui/input";
 import {
   Sidebar,
   SidebarContent,
@@ -18,12 +20,9 @@ import {
   SidebarMenuSubButton,
   SidebarMenuSubItem,
 } from "@/components/ui/sidebar";
-import { Input } from "@/components/ui/input";
-import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from "@/components/ui/collapsible";
+import { ChevronDown } from "lucide-react";
+import Link from "next/link";
+import { useState } from "react";
 
 const docsNavigation = [
   {
@@ -82,7 +81,6 @@ const docsNavigation = [
 ];
 
 export function DocsSidebar() {
-  const pathname = usePathname();
   const [search, setSearch] = useState("");
 
   const filteredNavigation = search
@@ -98,15 +96,15 @@ export function DocsSidebar() {
 
   return (
     <Sidebar className="pt-16 border-r">
-      <SidebarHeader className="pt-4 px-4">
+      <SidebarHeader className="pt-4 px-4 bg-white backdrop-blur-md shadow-lg">
         <Input
           placeholder="Search documentation..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          className="w-full"
+          className="w-full bg-gray-100"
         />
       </SidebarHeader>
-      <SidebarContent>
+      <SidebarContent className="bg-white backdrop-blur-md shadow-lg">
         {filteredNavigation.map((section) => (
           <SidebarGroup key={section.title}>
             <SidebarGroupLabel>{section.title}</SidebarGroupLabel>
