@@ -1,7 +1,6 @@
 "use server";
 
 import ChatLayout from "@/components/layout/ChatLayout";
-import { cookies } from "next/headers";
 import React, { Suspense } from "react";
 
 export default async function layout({

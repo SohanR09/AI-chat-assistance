@@ -3,14 +3,17 @@ import { useSession } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
 import { useEffect } from "react";
 
-export default function page() {
+export default function Page() {
   const { session } = useSession();
 
   useEffect(() => {
     if (!session) {
-      redirect("/");
+      return;
     } else {
       redirect(`/c/${session.user.id}`);
+      setTimeout(() => {
+        window.location.reload();
+      }, 500);
     }
   }, [session]);
 
