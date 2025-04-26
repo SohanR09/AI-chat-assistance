@@ -9,9 +9,9 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "AI Chat Assistant",
+  title: "Chat Beta",
   description: "Your intelligent AI chat assistant",
-  generator: "v0.dev",
+  generator: "Sohan Rathod",
 };
 
 export default function RootLayout({
