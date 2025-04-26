@@ -18,7 +18,6 @@ export default function ChatLayout({
 
   useEffect(() => {
     if (!session) {
-      redirect("/");
       return;
     }
 
