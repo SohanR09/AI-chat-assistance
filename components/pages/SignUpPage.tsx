@@ -18,7 +18,13 @@ export default function SignUpPage() {
             Back to Home
           </Link>
         </Button>
-        <SignUp path="/auth/sign-up" routing="path" signInUrl="/auth/sign-in" />
+        <SignUp
+          path="/auth/sign-up"
+          routing="path"
+          signInUrl="/auth/sign-in"
+          forceRedirectUrl={"/c"}
+          afterSignOutUrl={"/"}
+        />
       </div>
     </div>
   );

@@ -5,7 +5,7 @@ import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { Suspense } from "react";
 
-export default function Page() {
+export default async function Page() {
   return (
     <Suspense
       fallback={
@@ -29,7 +29,8 @@ export default function Page() {
             path="/auth/sign-in"
             routing="path"
             signUpUrl="/auth/sign-up"
-            forceRedirectUrl={"/c"}
+            afterSignOutUrl={"/"}
+            forceRedirectUrl={"c"}
           />
         </div>
       </div>

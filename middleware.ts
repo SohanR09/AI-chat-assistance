@@ -1,5 +1,6 @@
 // middleware.ts
 import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
+import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 
 // Match only `/c` route and its subpaths (e.g., /c, /c/123, etc.)
@@ -14,7 +15,7 @@ export default clerkMiddleware(async (auth, req) => {
       const signInUrl = new URL("/auth/sign-in", req.url);
       signInUrl.searchParams.set(
         "redirect_url",
-        `${origin}/${req.nextUrl.pathname}`
+        `${origin}${req.nextUrl.pathname}`
       );
       return NextResponse.redirect(signInUrl);
     }

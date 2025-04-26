@@ -1,10 +1,22 @@
-import ChatPage from "@/components/pages/ChatPage";
-import { cookies } from "next/headers";
-import React from "react";
+"use client";
+import { useSession } from "@clerk/nextjs";
+import { redirect } from "next/navigation";
+import { useEffect } from "react";
 
-export default async function page() {
-  const sessionCookie = (await cookies()).get("session")?.value;
-  const { sessionId, user } = sessionCookie ? JSON.parse(sessionCookie) : {};
+export default function page() {
+  const { session } = useSession();
 
-  return <ChatPage user={user} />;
+  useEffect(() => {
+    if (!session) {
+      redirect("/");
+    } else {
+      redirect(`/c/${session.user.id}`);
+    }
+  }, [session]);
+
+  return (
+    <div className="flex h-full min-h-[calc(100vh-2rem)] justify-center items-center auth-page mt-20">
+      Loading...
+    </div>
+  );
 }

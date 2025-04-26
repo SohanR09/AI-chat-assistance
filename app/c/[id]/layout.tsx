@@ -1,7 +1,14 @@
+"use server";
+
 import ChatLayout from "@/components/layout/ChatLayout";
+import { cookies } from "next/headers";
 import React, { Suspense } from "react";
 
-export default function layout({ children }: { children: React.ReactNode }) {
+export default async function layout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <Suspense
       fallback={

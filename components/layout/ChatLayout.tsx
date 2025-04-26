@@ -14,13 +14,14 @@ export default function ChatLayout({
   children: React.ReactNode;
 }) {
   const { session } = useSession();
-  const { signOut } = useAuth();
   const [user, setUser] = React.useState<UserInfo | null>(null);
 
   useEffect(() => {
     if (!session) {
-      redirect("/auth/sign-in");
+      redirect("/");
+      return;
     }
+
     setUser({
       sessionId: session.id,
       user: {
