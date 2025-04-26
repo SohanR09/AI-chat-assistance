@@ -2,14 +2,16 @@
 
 import LoadingSpinner from "@/public/loader-spinning";
 import { useUser } from "@clerk/nextjs";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import MarkDownMessage from "../MarkDown/MarkdownMessage";
 import ScrollToBottomButton from "../shared/ScrollToBottom";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { ScrollArea } from "../ui/scroll-area";
 import { User } from "@/index";
-import { Bot } from "lucide-react";
+import { Bot, Check, Copy } from "lucide-react";
 import ThinkingLoader from "@/public/ThinkingLoader";
+import { Button } from "../ui/button";
+import { useIsMobile } from "../ui/use-mobile";
 
 interface ChatSectionProps {
   messages: any;
@@ -28,11 +30,29 @@ function ChatSection({
 }: ChatSectionProps) {
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const scrollAreaSEctionRef = useRef<HTMLDivElement>(null);
+  const [hoveredMessageIndex, setHoveredMessageIndex] = useState<number | null>(
+    null
+  );
+  const [clickCopy, setClickCopy] = useState(false);
+  const [copyMesg, setCopyMesg] = useState("");
+
+  const isMobile = useIsMobile();
 
   // Scroll to bottom when messages change
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
+
+  const handleCopy = (text: string) => {
+    setClickCopy(true);
+    navigator.clipboard.writeText(text);
+    setCopyMesg(text);
+
+    setTimeout(() => {
+      setClickCopy(false);
+    }, 3000);
+  };
+
   return (
     <ScrollArea
       className="h-[calc(100vh-8rem)] overflow-y-auto px-2"
@@ -63,53 +83,80 @@ function ChatSection({
                 className={`flex ${
                   message.role === "user" ? "justify-end" : "justify-start"
                 }`}
+                onMouseEnter={() => setHoveredMessageIndex(index)}
+                onMouseLeave={() => setHoveredMessageIndex(null)}
               >
-                <div
-                  className={`flex gap-1 max-w-[80%] ${
-                    message.role === "user" ? "flex-row-reverse" : ""
-                  }`}
-                >
-                  <Avatar className="h-8 w-8">
-                    {message?.role === "user" ? (
-                      <>
-                        {user?.profileImageUrl ? (
-                          <AvatarImage src={user?.profileImageUrl} />
-                        ) : (
-                          <AvatarFallback className="text-stone-800 bg-gray-200 font-medium">
-                            {user?.firstName?.slice(0, 1).toUpperCase()}
-                          </AvatarFallback>
-                        )}
-                      </>
-                    ) : (
-                      <AvatarFallback className="text-stone-800 bg-gray-200 font-medium">
-                        <Bot className="h-6 w-6" />
-                      </AvatarFallback>
-                    )}
-                  </Avatar>
-                  {error && error?.length > 0 ? (
-                    <div>{error}</div>
-                  ) : (
-                    <div
-                      className={`rounded-lg p-3 ${
-                        message.role === "user"
-                          ? "bg-stone-900 text-primary-foreground"
-                          : "bg-muted"
-                      }`}
-                    >
-                      <MarkDownMessage
-                        markdown={message.content}
-                        role={message?.role}
-                      />
-                      {isAssistant && isLastMessage && thinking && (
-                        <div className="flex justify-end items-center mt-2">
-                          <span className="text-muted-foreground text-sm mr-2 flex items-center">
-                            <LoadingSpinner />
-                            Thinking...
-                          </span>
-                        </div>
+                <div className="flex-col">
+                  <div
+                    className={`flex gap-1 max-w-[100%] ${
+                      message.role === "user" ? "flex-row-reverse" : ""
+                    }`}
+                  >
+                    <Avatar className="h-8 w-8">
+                      {message?.role === "user" ? (
+                        <>
+                          {user?.profileImageUrl ? (
+                            <AvatarImage src={user?.profileImageUrl} />
+                          ) : (
+                            <AvatarFallback className="text-stone-800 bg-gray-200 font-medium">
+                              {user?.firstName?.slice(0, 1).toUpperCase()}
+                            </AvatarFallback>
+                          )}
+                        </>
+                      ) : (
+                        <AvatarFallback className="text-stone-800 bg-gray-200 font-medium">
+                          <Bot className="h-6 w-6" />
+                        </AvatarFallback>
                       )}
-                    </div>
-                  )}
+                    </Avatar>
+                    {error && error?.length > 0 ? (
+                      <div>{error}</div>
+                    ) : (
+                      <div
+                        className={`rounded-lg p-3 ${
+                          message.role === "user"
+                            ? "bg-stone-900 text-primary-foreground"
+                            : "bg-muted"
+                        }`}
+                      >
+                        <MarkDownMessage
+                          markdown={message.content}
+                          role={message?.role}
+                        />
+                        {isAssistant && isLastMessage && thinking && (
+                          <div className="flex justify-end items-center mt-2">
+                            <span className="text-muted-foreground text-sm mr-2 flex items-center">
+                              <LoadingSpinner />
+                              Thinking...
+                            </span>
+                          </div>
+                        )}
+                      </div>
+                    )}
+                  </div>
+                  <div
+                    className={`${
+                      message?.role === "assistant" ? "ml-8" : ""
+                    } ${
+                      isMobile
+                        ? "opacity-100"
+                        : hoveredMessageIndex === index
+                        ? "opacity-100"
+                        : "opacity-0"
+                    } p-2 hover:bg-gray-200 w-fit rounded-md cursor-pointer mt-1`}
+                    onClick={() => handleCopy(message.content)}
+                  >
+                    {clickCopy &&
+                    hoveredMessageIndex === index &&
+                    copyMesg === message.content ? (
+                      <Check
+                        className="w-4 h-4 font-bold text-green-500"
+                        strokeWidth={"4px"}
+                      />
+                    ) : (
+                      <Copy className="w-4 h-4"></Copy>
+                    )}
+                  </div>
                 </div>
               </div>
             );
