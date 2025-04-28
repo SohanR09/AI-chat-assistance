@@ -1,11 +1,10 @@
 "use client";
 
-import { ChatSidebar } from "@/components/chat-components/chat-sidebar";
 import { SidebarProvider } from "@/components/ui/sidebar";
-import { useState } from "react";
-import ChatTopRight from "../chat-components/chat-TopRight";
-import ChatTopLeft from "../chat-components/chat-TopLeft";
 import { User } from "@/index";
+import { useState } from "react";
+import ChatTopLeft from "../chat-components/chat-TopLeft";
+import ChatTopRight from "../chat-components/chat-TopRight";
 import { ChatWindow } from "../chat-components/chat-window";
 
 export default function ChatPage({ user }: { user: User }) {

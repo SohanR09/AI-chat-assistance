@@ -1,16 +1,13 @@
 "use client";
 
+import { User } from "@/index";
 import LoadingSpinner from "@/public/loader-spinning";
-import { useUser } from "@clerk/nextjs";
+import { Bot, Check, Copy } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import MarkDownMessage from "../MarkDown/MarkdownMessage";
 import ScrollToBottomButton from "../shared/ScrollToBottom";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { ScrollArea } from "../ui/scroll-area";
-import { User } from "@/index";
-import { Bot, Check, Copy } from "lucide-react";
-import ThinkingLoader from "@/public/ThinkingLoader";
-import { Button } from "../ui/button";
 import { useIsMobile } from "../ui/use-mobile";
 
 interface ChatSectionProps {
@@ -116,7 +113,7 @@ function ChatSection({
                         className={`rounded-lg p-3 ${
                           message.role === "user"
                             ? "bg-stone-900 text-primary-foreground"
-                            : "bg-muted"
+                            : "bg-transparent"
                         }`}
                       >
                         <MarkDownMessage

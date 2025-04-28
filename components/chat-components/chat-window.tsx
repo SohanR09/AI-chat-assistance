@@ -1,10 +1,10 @@
 "use client";
 
+import { User } from "@/index";
 import { useChat } from "@ai-sdk/react";
 import { useEffect, useState } from "react";
 import ChatInputZone from "./chat-inputzone";
 import ChatSection from "./chat-scroll";
-import { User } from "@/index";
 
 export function ChatWindow({ user }: { user: User }) {
   const [isLoading, setIsLoading] = useState(false);

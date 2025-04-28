@@ -1,7 +1,6 @@
-import React from "react";
-import { Textarea } from "../ui/textarea";
-import { Button } from "../ui/button";
 import { Send } from "lucide-react";
+import React from "react";
+import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 
 interface ChatInputZoneProps {
