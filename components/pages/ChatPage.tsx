@@ -1,12 +1,12 @@
 "use client";
 
-import { ChatInterface } from "@/components/chat-components/chat-interface";
 import { ChatSidebar } from "@/components/chat-components/chat-sidebar";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { useState } from "react";
 import ChatTopRight from "../chat-components/chat-TopRight";
 import ChatTopLeft from "../chat-components/chat-TopLeft";
 import { User } from "@/index";
+import { ChatWindow } from "../chat-components/chat-window";
 
 export default function ChatPage({ user }: { user: User }) {
   const [selectedChatId, setSelectedChatId] = useState<string | undefined>(
@@ -34,9 +34,9 @@ export default function ChatPage({ user }: { user: User }) {
         /> */}
         <ChatTopLeft />
         {/* Main chat interface */}
-        <div className="flex-1 w-full">
-          <ChatInterface user={user} />
-        </div>{" "}
+        <div className=" w-full">
+          <ChatWindow user={user} />
+        </div>
         <ChatTopRight />
       </div>
     </SidebarProvider>

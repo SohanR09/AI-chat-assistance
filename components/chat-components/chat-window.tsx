@@ -6,7 +6,7 @@ import ChatInputZone from "./chat-inputzone";
 import ChatSection from "./chat-scroll";
 import { User } from "@/index";
 
-export function ChatInterface({ user }: { user: User }) {
+export function ChatWindow({ user }: { user: User }) {
   const [isLoading, setIsLoading] = useState(false);
   const [isThinking, setIsThinking] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -45,15 +45,15 @@ export function ChatInterface({ user }: { user: User }) {
         thinking={isThinking}
       />
       <div className="border rounded-lg p-4 bg-background relative h-[90px]">
-        <div className="absolute bottom-0 left-0 right-0 z-50 p-4">
-          <ChatInputZone
-            input={input}
-            isLoading={isLoading}
-            setIsLoading={setIsLoading}
-            handleSubmit={handleSubmit}
-            handleInputChange={handleInputChange}
-          />
-        </div>
+        {/* <div className="absolute bottom-0 left-0 right-0 z-50 p-4"> */}
+        <ChatInputZone
+          input={input}
+          isLoading={isLoading}
+          setIsLoading={setIsLoading}
+          handleSubmit={handleSubmit}
+          handleInputChange={handleInputChange}
+        />
+        {/* </div> */}
       </div>
     </div>
   );

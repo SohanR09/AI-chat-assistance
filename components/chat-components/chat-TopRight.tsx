@@ -6,7 +6,7 @@ import { SignedIn, UserButton } from "@clerk/nextjs";
 
 export default function ChatTopRight() {
   return (
-    <div className="md:flex hidden p-4">
+    <div className="md:flex hidden pt-4">
       <div className="flex h-10 items-center justify-center space-x-4">
         <Button
           size={"icon"}
